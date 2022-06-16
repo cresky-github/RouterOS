@@ -1,6 +1,6 @@
 RouterOS脚本文件 rsc
 
-ChinaRoute.rsc, 0.5MB
+ChinaRoute.rsc，0.5MB
 
 WorldRoute.rsc，1.2MB
 
