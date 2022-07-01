@@ -4,7 +4,7 @@ ChinaRoute.rsc，0.5MB
 
 WorldRoute.rsc，1.2MB
 
-IPv4-CIDR.rsc，2.1MB
+IPv4-CIDR.rsc，2.3MB
 
 与上述值偏差过大，属异常。
 
