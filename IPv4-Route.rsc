@@ -1,4 +1,4 @@
-# RouterOS Route 20220911 145552
+# RouterOS Route 20220912 053000
 # \t\t--Tanxing
 /system logging enable 0
 :local WorldCIDR {
@@ -13440,7 +13440,7 @@
 :for Item from=0 to=$srcLen step=1 do={
     :local index [:find $dstRouteStr ($WorldCIDR->$Item)]
     :if ($index>0) do={} else={
-        /ip route add distance=24 dst-address=($WorldCIDR->$Item) gateway=$Gateway comment="Route - World.20220911 145552"
+        /ip route add distance=24 dst-address=($WorldCIDR->$Item) gateway=$Gateway comment="Route - World.20220912 053000"
         :set addItem "$[$addItem]$[($WorldCIDR->$Item)]; "
     };
 }
