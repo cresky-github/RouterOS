@@ -10,7 +10,7 @@ IPv4-CIDR.rsc，2.3MB
 
 2022/6/25起，只提供 IPv4-CIDR.rsc，覆盖整个IPv4约99.88%。
 
-2022/09/11起，IPv4-Route.rsc 把WorldRoute写入到路由表
+2022/09/11起，IPv4-Route.rsc 把WorldRoute写入到路由表。导入前，根据实际情况修改 网关和路由表名。
 
 
 ## 更新脚本
