@@ -1,4 +1,4 @@
-# RouterOS Route 20220921 053000
+# RouterOS Route 20220922 053000
 # \t\t--Tanxing
 /system logging enable 0
 :local WorldCIDR {
@@ -8310,7 +8310,32 @@
 185.8.0.0/13;
 185.16.0.0/12;
 185.32.0.0/11;
-185.64.0.0/10;
+185.64.0.0/11;
+185.96.0.0/12;
+185.112.0.0/16;
+185.113.0.0/17;
+185.113.128.0/19;
+185.113.160.0/20;
+185.113.176.0/22;
+185.113.184.0/21;
+185.113.192.0/18;
+185.114.0.0/15;
+185.116.0.0/14;
+185.120.0.0/15;
+185.122.0.0/16;
+185.123.0.0/17;
+185.123.128.0/20;
+185.123.148.0/22;
+185.123.156.0/22;
+185.123.160.0/19;
+185.123.192.0/18;
+185.124.0.0/19;
+185.124.32.0/20;
+185.124.48.0/21;
+185.124.64.0/18;
+185.124.128.0/17;
+185.125.0.0/16;
+185.126.0.0/15;
 185.128.0.0/12;
 185.144.0.0/16;
 185.145.0.0/17;
@@ -8334,7 +8359,13 @@
 185.193.0.0/16;
 185.194.0.0/15;
 185.196.0.0/14;
-185.200.0.0/15;
+185.200.0.0/17;
+185.200.128.0/18;
+185.200.192.0/19;
+185.200.224.0/21;
+185.200.232.0/22;
+185.200.240.0/20;
+185.201.0.0/16;
 185.202.0.0/16;
 185.203.0.0/19;
 185.203.32.0/22;
@@ -9453,7 +9484,15 @@
 195.79.0.0/16;
 195.80.0.0/12;
 195.96.0.0/11;
-195.128.0.0/10;
+195.128.0.0/11;
+195.160.0.0/17;
+195.160.160.0/19;
+195.160.192.0/18;
+195.161.0.0/16;
+195.162.0.0/15;
+195.164.0.0/14;
+195.168.0.0/13;
+195.176.0.0/12;
 195.192.0.0/11;
 195.224.0.0/12;
 195.240.0.0/15;
@@ -13369,9 +13408,11 @@
 }
 
 
+:local Distance 24
 :local Gateway 10.0.0.254
+:local RouteTable "World"
 :local srcLen ([:len $WorldCIDR]-1)
-:local dstRouteList [/ip route print as-value where distance=24]
+:local dstRouteList [/ip route print as-value where distance=$Distance]
 :local dstRouteStr [:tostr $dstRouteList]
 :local dstRouteLen ([:len $dstRouteList]-1)
 :local Item
@@ -13381,7 +13422,7 @@
 :for Item from=0 to=$srcLen step=1 do={
     :local index [:find $dstRouteStr ($WorldCIDR->$Item)]
     :if ($index>0) do={} else={
-        /ip route add distance=24 dst-address=($WorldCIDR->$Item) gateway=$Gateway comment="Route - World.20220921 053000"
+        /ip route add distance=$Distance dst-address=($WorldCIDR->$Item) gateway=$Gateway routing-mark=$RouteTable comment="Route - World.20220922 053000"
         :set addItem "$[$addItem]$[($WorldCIDR->$Item)]; "
     };
 }
