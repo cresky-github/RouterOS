@@ -1,5 +1,5 @@
-# RouterOS Route 20220929 053000
-# \t\t--Tanxing
+# RouterOS Route 20221006 053000
+# 							--Tanxing
 /system logging enable 0
 :local WorldCIDR {
 1.0.0.0/24;
@@ -773,7 +773,7 @@
 45.113.244.0/22;
 45.113.248.0/22;
 45.114.4.0/22;
-45.114.8.0/22;
+45.114.8.0/21;
 45.114.16.0/20;
 45.114.36.0/22;
 45.114.44.0/22;
@@ -2441,7 +2441,7 @@
 103.53.184.0/21;
 103.53.192.0/21;
 103.53.200.0/22;
-103.53.220.0/22;
+103.53.216.0/21;
 103.53.224.0/21;
 103.53.232.0/22;
 103.53.240.0/21;
@@ -7053,7 +7053,18 @@
 128.143.0.0/16;
 128.144.0.0/12;
 128.160.0.0/11;
-128.192.0.0/10;
+128.192.0.0/11;
+128.224.0.0/12;
+128.240.0.0/13;
+128.248.0.0/14;
+128.252.0.0/15;
+128.254.0.0/17;
+128.254.128.0/20;
+128.254.144.0/21;
+128.254.156.0/22;
+128.254.160.0/19;
+128.254.192.0/18;
+128.255.0.0/16;
 129.0.0.0/12;
 129.16.0.0/13;
 129.24.0.0/14;
@@ -8345,17 +8356,7 @@
 185.203.128.0/17;
 185.204.0.0/14;
 185.208.0.0/12;
-185.224.0.0/12;
-185.240.0.0/15;
-185.242.0.0/16;
-185.243.0.0/19;
-185.243.32.0/21;
-185.243.44.0/22;
-185.243.48.0/20;
-185.243.64.0/18;
-185.243.128.0/17;
-185.244.0.0/14;
-185.248.0.0/13;
+185.224.0.0/11;
 186.0.0.0/7;
 188.0.0.0/9;
 188.128.0.0/15;
@@ -13389,31 +13390,31 @@
 :local dstRouteStr [:tostr $dstRouteList]
 :local dstRouteLen ([:len $dstRouteList]-1)
 :local Item
-:local addItem ""
+:local RouteItem ""
 
 :log info "IPv4 World Route updating..."
 :for Item from=0 to=$srcLen step=1 do={
     :local index [:find $dstRouteStr ($WorldCIDR->$Item)]
     :if ($index>0) do={} else={
-        /ip route add distance=$Distance dst-address=($WorldCIDR->$Item) gateway=$Gateway routing-mark=$RouteTable comment="Route - World.20220929 053000"
-        :set addItem "$[$addItem]$[($WorldCIDR->$Item)]; "
+        /ip route add distance=$Distance dst-address=($WorldCIDR->$Item) gateway=$Gateway routing-mark=$RouteTable comment="Route - World.20221006 053000"
+        :set RouteItem "$[$RouteItem]$[($WorldCIDR->$Item)]; "
     };
 }
-:if ([:len $addItem]>0) do={
-    :log warning "World route add $[$addItem]"
+:if ([:len $RouteItem]>0) do={
+    :log warning "World route add $[$RouteItem]"
 }
 :log info "IPv4 World Route updated!"
 
-:set addItem ""
+:set RouteItem ""
 :log info "Search for expired World routing items and delete..."
 :for Item from=0 to=$dstRouteLen step=1 do={
     :local index [:find $WorldCIDR ($dstRouteList->$Item->"dst-address")]
     :if ($index>=0) do={} else={
         /ip route remove ($dstRouteList->$Item->".id")
-        :set addItem "$[$addItem]$[($dstRouteList->$Item->"dst-address")]; "
+        :set RouteItem "$[$RouteItem]$[($dstRouteList->$Item->"dst-address")]; "
     };
 }
-:if ([:len $addItem]>0) do={
-    :log warning "World route remove $[$addItem]"
+:if ([:len $RouteItem]>0) do={
+    :log warning "World route remove $[$RouteItem]"
 }
-:log info "Expired World routing item deletion completed!"
+:log info "Expired World routing item deleted!"
