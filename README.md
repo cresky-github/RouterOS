@@ -24,30 +24,18 @@ IPv4-Route.rsc会读取，并使用。
 ![image](https://user-images.githubusercontent.com/52242290/198998946-0e848561-83f9-43e6-8320-3f9ce7b3c96d.png)
 
 ## 更新脚本
-
+```
 :log info "start download IPv4-CIDR.rsc ..."
-
 /tool fetch http-method=get url=https://raw.githubusercontent.com/cresky-github/RouterOS/main/IPv4-CIDR.rsc
-
 :log info "IPv4-CIDR.rsc downloaded."
-
 /file {
-
-  :local addrFile
-	
-  :local fileSize
-	
-  :set addrFile [find where name="IPv4-CIDR.rsc"]
-	
-  :set fileSize [get $addrFile size]
-	
-  :if ($fileSize > 2000000) do={
-	
-    /import file=IPv4-CIDR.rsc
-		
-    :log info "IPv4-CIDR updated!"
-		
-  }
-	
+  :local addrFile	
+  :local fileSize	
+  :set addrFile [find where name="IPv4-CIDR.rsc"]	
+  :set fileSize [get $addrFile size]	
+  :if ($fileSize > 2000000) do={	
+    /import file=IPv4-CIDR.rsc		
+    :log info "IPv4-CIDR updated!"		
+  }	
 }
-
+```
