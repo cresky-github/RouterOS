@@ -18,8 +18,10 @@ IPv4-CIDR.rsc，2.3MB
 :global "BYPASS.DISTANCE" 64
 :global "BYPASS.TABLE" "World"
 ```
-后根据个人实际情况修改。
+后根据个人实际情况修改。也可直接修改脚本。
 IPv4-Route.rsc会读取，并使用。
+
+![image](https://user-images.githubusercontent.com/52242290/198998946-0e848561-83f9-43e6-8320-3f9ce7b3c96d.png)
 
 ## 更新脚本
 
