@@ -1,4 +1,4 @@
-# RouterOS Route 20221030 064000
+# RouterOS Route 20221031 064000
 # 							--Tanxing
 /system logging enable 0
 :local WorldCIDR {
@@ -13377,14 +13377,14 @@
 :for Item from=0 to=$srcLen step=1 do={
     :local index [:find $dstRouteStr ($WorldCIDR->$Item)]
     :if ($index>0) do={} else={
-        /ip route add distance=$Distance dst-address=($WorldCIDR->$Item) gateway=$Gateway routing-mark=$RouteTable comment="Route - World.20221030 064000"
+        /ip route add distance=$Distance dst-address=($WorldCIDR->$Item) gateway=$Gateway routing-mark=$RouteTable comment="Route - World.20221031 064000"
         :set RouteItem "$[$RouteItem]$[($WorldCIDR->$Item)]; "
     };
 }
 :if ([:len $RouteItem]>0) do={
     :log warning "IPv4 World \C2\B7\D3\C9\CF\EE\CC\ED\BC\D3 $[$RouteItem]"
 }
-:log info "IPv4 World Route updated!"
+:log info "IPv4 World \C2\B7\D3\C9\B8\FC\D0\C2\CD\EA\B1\CF\A3\A1"
 
 :set RouteItem ""
 :log info "\CB\D1\CB\F7\B2\A2\C9\BE\B3\FD\B9\FD\C6\DA World \C2\B7\D3\C9\CF\EE ..."
