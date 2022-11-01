@@ -1,4 +1,4 @@
-# RouterOS Route 20221031 183642
+# RouterOS Route 20221101 064000
 # 							--Tanxing
 /system logging enable 0
 :local WorldCIDR {
@@ -13368,7 +13368,7 @@
 :local "TEST.TABLE" ([/system script environment print as-value where name="BYPASS.TABLE"]->0->"value")
 :local Distance 64
 :local Gateway 10.0.255.254
-:local RouteTable "World"
+:local Table "World"
 :local srcLen ([:len $WorldCIDR]-1)
 :local dstRouteList [/ip route print as-value where distance=$Distance]
 :local dstRouteStr [:tostr $dstRouteList]
@@ -13386,15 +13386,15 @@
 };
 
 
-:if ($"TEST.TABLE"!=$RouteTable) do={
-  :set RouteTable $"TEST.TABLE"
+:if ($"TEST.TABLE"!=$Table) do={
+  :set Table $"TEST.TABLE"
 };
 
 :log info "\B8\FC\D0\C2 IPv4 World \C2\B7\D3\C9\CF\EE..."
 :for Item from=0 to=$srcLen step=1 do={
     :local index [:find $dstRouteStr ($WorldCIDR->$Item)]
     :if ($index>0) do={} else={
-        /ip route add distance=$Distance dst-address=($WorldCIDR->$Item) gateway=$Gateway routing-mark=$RouteTable comment="Route - World.20221031 183642"
+        /ip route add distance=$Distance dst-address=($WorldCIDR->$Item) gateway=$Gateway routing-mark=$Table comment="Route - World.20221101 064000"
         :set RouteItem "$[$RouteItem]$[($WorldCIDR->$Item)]; "
     };
 }
