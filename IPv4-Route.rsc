@@ -1,6 +1,5 @@
-# RouterOS Route 20221101 064000
+# RouterOS Route 20221108 084234
 # 							--Tanxing
-/system logging enable 0
 :local WorldCIDR {
 1.0.0.0/24;
 1.0.4.0/22;
@@ -2104,7 +2103,7 @@
 103.28.224.0/19;
 103.29.0.0/20;
 103.29.20.0/22;
-103.29.24.0/22;
+103.29.26.0/23;
 103.29.28.0/24;
 103.29.30.0/23;
 103.29.32.0/19;
@@ -2112,14 +2111,18 @@
 103.29.140.0/22;
 103.29.144.0/20;
 103.29.160.0/19;
-103.29.192.0/18;
+103.29.192.0/19;
+103.29.224.0/21;
+103.29.232.0/22;
+103.29.238.0/23;
+103.29.240.0/20;
 103.30.0.0/20;
 103.30.16.0/22;
 103.30.24.0/21;
 103.30.32.0/19;
 103.30.64.0/19;
 103.30.100.0/22;
-103.30.104.0/21;
+103.30.108.0/22;
 103.30.112.0/20;
 103.30.128.0/20;
 103.30.144.0/22;
@@ -3144,8 +3147,7 @@
 103.94.128.0/19;
 103.94.164.0/22;
 103.94.168.0/21;
-103.94.176.0/22;
-103.94.184.0/21;
+103.94.176.0/20;
 103.94.192.0/21;
 103.94.204.0/22;
 103.94.208.0/20;
@@ -13390,21 +13392,21 @@
   :set Table $"TEST.TABLE"
 };
 
-:log info "\B8\FC\D0\C2 IPv4 World \C2\B7\D3\C9\CF\EE..."
+:log warning "\B8\FC\D0\C2 IPv4 World \C2\B7\D3\C9\CF\EE..."
 :for Item from=0 to=$srcLen step=1 do={
     :local index [:find $dstRouteStr ($WorldCIDR->$Item)]
     :if ($index>0) do={} else={
-        /ip route add distance=$Distance dst-address=($WorldCIDR->$Item) gateway=$Gateway routing-mark=$Table comment="Route - World.20221101 064000"
+        /ip route add distance=$Distance dst-address=($WorldCIDR->$Item) gateway=$Gateway routing-mark=$Table comment="Route - World.20221108 084234"
         :set RouteItem "$[$RouteItem]$[($WorldCIDR->$Item)]; "
     };
 }
 :if ([:len $RouteItem]>0) do={
     :log warning "IPv4 World \C2\B7\D3\C9\CF\EE\CC\ED\BC\D3 $[$RouteItem]"
 }
-:log info "IPv4 World \C2\B7\D3\C9\B8\FC\D0\C2\CD\EA\B1\CF\A3\A1"
+:log warning "IPv4 World \C2\B7\D3\C9\B8\FC\D0\C2\CD\EA\B1\CF\A3\A1"
 
 :set RouteItem ""
-:log info "\CB\D1\CB\F7\B2\A2\C9\BE\B3\FD\B9\FD\C6\DA World \C2\B7\D3\C9\CF\EE ..."
+:log warning "\CB\D1\CB\F7\B2\A2\C9\BE\B3\FD\B9\FD\C6\DA World \C2\B7\D3\C9\CF\EE ..."
 :for Item from=0 to=$dstRouteLen step=1 do={
     :local index [:find $WorldCIDR ($dstRouteList->$Item->"dst-address")]
     :if ($index>=0) do={} else={
@@ -13415,4 +13417,4 @@
 :if ([:len $RouteItem]>0) do={
     :log warning "\C9\BE\B3\FD World \C2\B7\D3\C9\CF\EE $[$RouteItem]"
 }
-:log info "\B9\FD\C6\DA World \C2\B7\D3\C9\CF\EE\D2\D1\C9\BE\B3\FD\A3\A1"
+:log warning "\B9\FD\C6\DA World \C2\B7\D3\C9\CF\EE\D2\D1\C9\BE\B3\FD\A3\A1"
