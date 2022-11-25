@@ -20,6 +20,15 @@ IPv4-Route.rsc会读取，并使用。
 
 ![image](https://user-images.githubusercontent.com/52242290/198998946-0e848561-83f9-43e6-8320-3f9ce7b3c96d.png)
 
+```
+/system logging disable 0
+/system logging disable 5
+/import file=IPv4-CIDR.rsc
+/import file=IPv4-Route.rsc
+/system logging enable 0
+/system logging enable 5
+```
+
 ## 更新脚本
 ```
 :log info "start download IPv4-CIDR.rsc ..."
