@@ -1,3 +1,8 @@
+
+###折腾 fake-ip 分流，以下内容已经变得无意义。
+
+
+
 RouterOS脚本文件 rsc
 - ChinaRoute.rsc，0.5MB
 - WorldRoute.rsc，1.2MB
